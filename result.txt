@@ -1,0 +1,23 @@
+Mazda RX4 6 21
+Mazda RX4 Wag 6 21
+Hornet 4 Drive 6 21.4
+Hornet Sportabout 8 18.7
+Valiant 6 18.1
+Duster 360 8 14.3
+Merc 280 6 19.2
+Merc 280C 6 17.8
+Merc 450SE 8 16.4
+Merc 450SL 8 17.3
+Merc 450SLC 8 15.2
+Cadillac Fleetwood 8 10.4
+Lincoln Continental 8 10.4
+Chrysler Imperial 8 14.7
+Toyota Corona 4 21.5
+Dodge Challenger 8 15.5
+AMC Javelin 8 15.2
+Camaro Z28 8 13.3
+Pontiac Firebird 8 19.2
+Ford Pantera L 8 15.8
+Ferrari Dino 6 19.7
+Maserati Bora 8 15
+Volvo 142E 4 21.4

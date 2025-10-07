@@ -1,41 +1,19 @@
 #!/usr/bin/env node
 const fs = require("fs");
+const { program } = require("commander");
 const path = require("path");
 
 // ---- Парсинг аргументів ----
-function parseArgs(args) {
-  const parsed = {};
-  for (let i = 0; i < args.length; i++) {
-    switch (args[i]) {
-      case "-i":
-      case "--input":
-        parsed.input = args[i + 1];
-        i++;
-        break;
-      case "-o":
-      case "--output":
-        parsed.output = args[i + 1];
-        i++;
-        break;
-      case "-d":
-      case "--display":
-        parsed.display = true;
-        break;
-      case "-c":
-      case "--cylinders":
-        parsed.cylinders = true;
-        break;
-      case "-m":
-      case "--mpg":
-        parsed.mpg = parseFloat(args[i + 1]);
-        i++;
-        break;
-    }
-  }
-  return parsed;
-}
+program
+  .requiredOption("-i, --input <file>", "input JSON file")
+  .option("-o, --output <file>", "output file")
+  .option("-d, --display", "display result in console")
+  .option("-c, --cylinders", "show cylinders")
+  .option("-m, --mpg <number>", "filter cars with mpg lower than given value", parseFloat);
 
-const options = parseArgs(process.argv.slice(2));
+program.parse(process.argv);
+
+const options = program.opts();
 
 // ---- Перевірки ----
 if (!options.input) {
@@ -63,16 +41,14 @@ try {
   console.error("Invalid JSON format");
   process.exit(1);
 }
-
-// ---- Обробка даних ----
+ 
 let resultData = data;
-
-// фільтрація по mpg
+ 
 if (options.mpg !== undefined && !isNaN(options.mpg)) {
   resultData = resultData.filter(item => Number(item.mpg) < options.mpg);
 }
 
-// формування текстового виводу
+
 let output = resultData
   .map(item => {
     const parts = [item.model];
@@ -81,8 +57,7 @@ let output = resultData
     return parts.join(" ");
   })
   .join("\n");
-
-// ---- Вивід ----
+ 
 if (options.output) {
   const outputPath = path.resolve(options.output);
   fs.writeFileSync(outputPath, output, "utf8");
